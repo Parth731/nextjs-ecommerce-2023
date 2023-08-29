@@ -70,12 +70,12 @@ export default function Navbar() {
   //     setCurrentUpdatedProduct(null);
   // }, [pathName]);
 
-  // function handleLogout() {
-  //   setIsAuthUser(false);
-  //   setUser(null);
-  //   localStorage.clear();
-  //   router.push("/");
-  // }
+  function handleLogout() {
+    setIsAuthUser(false);
+    setUser(null);
+    localStorage.clear();
+    router.push("/");
+  }
 
   const isAdminView = pathName.includes("admin-view");
 
@@ -135,7 +135,7 @@ export default function Navbar() {
             ) : null}
             {isAuthUser ? (
               <button
-                // onClick={handleLogout}
+                onClick={handleLogout}
                 className={
                   "mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
                 }

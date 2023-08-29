@@ -7,7 +7,7 @@ const configOptions: any = {
 };
 
 const connectToDB = async () => {
-  const connectionUrl: any = process.env.MONGODB_URI;
+  const connectionUrl: any = `mongodb+srv://parthdangroshiya31:5JNDyagEMGRjpEG7@cluster0.9fsm5wt.mongodb.net/nextjs-thirteen-ecommerce`;
 
   mongoose
     .connect(connectionUrl, configOptions)

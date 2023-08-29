@@ -1,6 +1,7 @@
 import { userRegisterType } from "@/types/type";
 
 export const registerNewUser = async (formData: userRegisterType) => {
+  console.log(formData);
   try {
     const response = await fetch("/api/register", {
       method: "POST",

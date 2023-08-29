@@ -6,9 +6,9 @@ export default function SelectComponent({
 }: any) {
   return (
     <div className="relative">
-      <p className=" pt-0 pr-2 absolute pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 bg-white">
+      <span className=" pt-0 pr-2 absolute pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 bg-white">
         {label}
-      </p>
+      </span>
       <select
         value={value}
         onChange={onChange}

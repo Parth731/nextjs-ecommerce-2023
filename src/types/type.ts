@@ -27,11 +27,35 @@ export interface userLoginType {
   password: string;
 }
 
-export interface userRegisterType {
+export interface userRegisterType extends userLoginType {
+  name: string;
+  role: string;
+}
+
+export interface responseLoginType {
+  _id: string;
   name: string;
   email: string;
-  password: string;
   role: string;
+}
+
+export interface ComponentLevelLoaderType {
+  text: string;
+  color: string;
+  loading: boolean;
+  size?: number;
+}
+
+export interface adminAddProductType {
+  name: string;
+  price: number;
+  description: string;
+  category: string;
+  sizes: any | null;
+  deliveryInfo: string;
+  onSale: string;
+  imageUrl: string | null;
+  priceDrop: number;
 }
 
 export type configOptionsType = {

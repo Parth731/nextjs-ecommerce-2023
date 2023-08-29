@@ -2,11 +2,17 @@
 
 import InputComponent from "@/components/FormElements/InputComponent";
 import { GlobalContext } from "@/context";
+import { userLoginType } from "@/types/type";
 import { loginFormControls } from "@/utils";
 import { useRouter } from "next/navigation";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import { login } from "@/services/login";
+import ComponentLevelLoader from "@/components/Loader/ComponentLevelLoader";
+import { toast } from "react-toastify";
+import Notification from "@/components/Notification";
 
-const initialFormdata = {
+const initialFormdata: userLoginType = {
   email: "",
   password: "",
 };
@@ -36,36 +42,41 @@ export default function Login() {
       : false;
   }
 
-  //   async function handleLogin() {
-  //     setComponentLevelLoader({ loading: true, id: "" });
-  //     const res = await login(formData);
+  async function handleLogin() {
+    setComponentLevelLoader({ loading: true, id: "" });
+    const res = await login(formData);
 
-  //     console.log(res);
+    console.log(res);
 
-  //     if (res.success) {
-  //       toast.success(res.message, {
-  //         position: toast.POSITION.TOP_RIGHT,
-  //       });
-  //       setIsAuthUser(true);
-  //       setUser(res?.finalData?.user);
-  //       setFormData(initialFormdata);
-  //       Cookies.set("token", res?.finalData?.token);
-  //       localStorage.setItem("user", JSON.stringify(res?.finalData?.user));
-  //       setComponentLevelLoader({ loading: false, id: "" });
-  //     } else {
-  //       toast.error(res.message, {
-  //         position: toast.POSITION.TOP_RIGHT,
-  //       });
-  //       setIsAuthUser(false);
-  //       setComponentLevelLoader({ loading: false, id: "" });
-  //     }
-  //   }
+    if (res.success) {
+      toast.success(res.message, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      setIsAuthUser(true);
+      setUser(res?.finalData?.user);
+      setFormData(initialFormdata);
+      Cookies.set("token", res?.finalData?.token);
+      localStorage.setItem("user", JSON.stringify(res?.finalData?.user));
+      setComponentLevelLoader({ loading: false, id: "" });
+    } else {
+      toast.error(res.message, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      setIsAuthUser(false);
+      setComponentLevelLoader({ loading: false, id: "" });
+    }
+  }
 
-  //   console.log(isAuthUser, user);
+  console.log(isAuthUser, user);
 
-  //   useEffect(() => {
-  //     if (isAuthUser) router.push("/");
-  //   }, [isAuthUser]);
+  useEffect(() => {
+    if (isAuthUser) {
+      router.push("/");
+      toast.success("login successfully", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  }, [isAuthUser]);
 
   return (
     <div className="bg-white relative">
@@ -99,9 +110,9 @@ export default function Login() {
                      text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide
                      "
                   disabled={!isValidForm()}
-                  //   onClick={handleLogin}
+                  onClick={handleLogin}
                 >
-                  {/* {componentLevelLoader && componentLevelLoader.loading ? (
+                  {componentLevelLoader && componentLevelLoader.loading ? (
                     <ComponentLevelLoader
                       text={"Logging In"}
                       color={"#ffffff"}
@@ -109,9 +120,9 @@ export default function Login() {
                         componentLevelLoader && componentLevelLoader.loading
                       }
                     />
-                  ) : ( */}
-                  Login
-                  {/* )} */}
+                  ) : (
+                    "Login"
+                  )}
                 </button>
                 <div className="flex flex-col gap-2">
                   <p>New to website ?</p>
@@ -129,7 +140,7 @@ export default function Login() {
           </div>
         </div>
       </div>
-      {/* <Notification /> */}
+      <Notification />
     </div>
   );
 }
