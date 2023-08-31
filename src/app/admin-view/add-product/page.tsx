@@ -8,7 +8,7 @@ import Notification from "@/components/Notification";
 import { app, firebaseStorageURL } from "@/config/firebase";
 import { GlobalContext } from "@/context";
 import { addNewProduct, updateAProduct } from "@/services/product";
-import { RegistrationFormControlType, adminAddProductType } from "@/types/type";
+import { FormControlType, adminAddProductType } from "@/types/type";
 import { AvailableSizes, adminAddProductformControls } from "@/utils";
 import {
   getDownloadURL,
@@ -78,9 +78,10 @@ const AdminAddNewProduct = () => {
 
   const router = useRouter();
 
-  // useEffect(() => {
-  //   if (currentUpdatedProduct !== null) setFormData(currentUpdatedProduct);
-  // }, [currentUpdatedProduct]);
+  useEffect(() => {
+    if (currentUpdatedProduct !== null) setFormData(currentUpdatedProduct);
+    console.log(currentUpdatedProduct);
+  }, [currentUpdatedProduct]);
 
   async function handleImage(event: any) {
     console.log(event.target.files[0]);
@@ -131,7 +132,7 @@ const AdminAddNewProduct = () => {
     if (res.success) {
       setComponentLevelLoader({ loading: false, id: "" });
       toast.success(res.message, {
-        position: toast.POSITION.TOP_RIGHT,
+        position: toast.POSITION.TOP_CENTER,
       });
 
       setFormData(initialFormData);
@@ -141,7 +142,7 @@ const AdminAddNewProduct = () => {
       }, 1000);
     } else {
       toast.error(res.message, {
-        position: toast.POSITION.TOP_RIGHT,
+        position: toast.POSITION.TOP_CENTER,
       });
       setComponentLevelLoader({ loading: false, id: "" });
       setFormData(initialFormData);
@@ -157,7 +158,19 @@ const AdminAddNewProduct = () => {
             max="1000000"
             type="file"
             onChange={handleImage}
+            // value={formData["imageUrl"]}
           />
+          {formData["imageUrl"] && (
+            <>
+              <img
+                src={formData["imageUrl"]}
+                alt="imageUrl"
+                width="200px"
+                height="200px"
+              />
+              <p>{formData["imageUrl"]}</p>
+            </>
+          )}
 
           <div className="flex gap-2 flex-col">
             <label>Available sizes</label>
@@ -168,7 +181,7 @@ const AdminAddNewProduct = () => {
             />
           </div>
           {adminAddProductformControls.map(
-            (controlItem: RegistrationFormControlType, index: number) =>
+            (controlItem: FormControlType, index: number) =>
               controlItem.componentType === "input" ? (
                 <InputComponent
                   key={index}

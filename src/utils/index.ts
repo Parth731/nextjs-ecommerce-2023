@@ -1,4 +1,4 @@
-import { RegistrationFormControlType, navOptionsType } from "@/types/type";
+import { FormControlType, navOptionsType, sizes } from "@/types/type";
 
 export const navOptions: navOptionsType[] = [
   {
@@ -41,7 +41,7 @@ export const adminNavOptions: navOptionsType[] = [
   },
 ];
 
-export const registrationFormControls: RegistrationFormControlType[] = [
+export const registrationFormControls: FormControlType[] = [
   {
     id: "name",
     type: "text",
@@ -82,7 +82,7 @@ export const registrationFormControls: RegistrationFormControlType[] = [
   },
 ];
 
-export const loginFormControls: RegistrationFormControlType[] = [
+export const loginFormControls: FormControlType[] = [
   {
     id: "email",
     type: "email",
@@ -99,7 +99,7 @@ export const loginFormControls: RegistrationFormControlType[] = [
   },
 ];
 
-export const adminAddProductformControls: RegistrationFormControlType[] = [
+export const adminAddProductformControls: FormControlType[] = [
   {
     id: "name",
     type: "text",
@@ -175,7 +175,7 @@ export const adminAddProductformControls: RegistrationFormControlType[] = [
   },
 ];
 
-export const AvailableSizes = [
+export const AvailableSizes: sizes[] = [
   {
     id: "s",
     label: "S",

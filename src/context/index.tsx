@@ -1,6 +1,11 @@
 "use client";
 
-import { LayoutProps, responseLoginType } from "@/types/type";
+import {
+  LayoutProps,
+  adminAddProductType,
+  loadderType,
+  responseLoginType,
+} from "@/types/type";
 import { createContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
@@ -8,15 +13,19 @@ export const GlobalContext = createContext(null);
 
 export default function GlobalState({ children }: LayoutProps) {
   const [showNavModal, setShowNavModal] = useState<boolean>(false);
-  const [commonLoader, setCommonLoader] = useState(false);
-  const [pageLevelLoader, setPageLevelLoader] = useState(false);
-  const [componentLevelLoader, setComponentLevelLoader] = useState({
-    loading: false,
-    id: "",
-  });
-  const [isAuthUser, setIsAuthUser] = useState(false);
+  const [commonLoader, setCommonLoader] = useState<boolean>(false);
+  const [pageLevelLoader, setPageLevelLoader] = useState<boolean>(false);
+  const [componentLevelLoader, setComponentLevelLoader] = useState<loadderType>(
+    {
+      loading: false,
+      id: "",
+    }
+  );
+  const [isAuthUser, setIsAuthUser] = useState<boolean>(false);
   const [user, setUser] = useState<responseLoginType | {}>({});
-  const [currentUpdatedProduct, setCurrentUpdatedProduct] = useState(null);
+  const [currentUpdatedProduct, setCurrentUpdatedProduct] = useState<
+    adminAddProductType | {}
+  >({});
 
   useEffect(() => {
     if (Cookies.get("token") !== undefined) {

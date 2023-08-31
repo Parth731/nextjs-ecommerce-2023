@@ -8,7 +8,7 @@ export interface navOptionsType {
   path: string;
 }
 
-export interface RegistrationFormControlType {
+export interface FormControlType {
   id: string;
   type: string;
   placeholder: string;
@@ -39,6 +39,11 @@ export interface responseLoginType {
   role: string;
 }
 
+export interface loadderType {
+  id: string;
+  loading: boolean;
+}
+
 export interface ComponentLevelLoaderType {
   text: string;
   color: string;
@@ -46,16 +51,29 @@ export interface ComponentLevelLoaderType {
   size?: number;
 }
 
+export interface sizes {
+  id: string;
+  label: string;
+}
+
 export interface adminAddProductType {
   name: string;
   price: number;
   description: string;
   category: string;
-  sizes: any | null;
+  sizes: sizes[];
   deliveryInfo: string;
   onSale: string;
-  imageUrl: string | null;
+  imageUrl: string;
   priceDrop: number;
+}
+
+export interface listofProducts extends adminAddProductType {
+  _id: string;
+}
+
+export interface productsData {
+  data: listofProducts[];
 }
 
 export type configOptionsType = {

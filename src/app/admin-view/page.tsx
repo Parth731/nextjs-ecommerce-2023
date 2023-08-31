@@ -1,7 +1,7 @@
 import React from "react";
 
-const AdminView = () => {
-  return <div>AdminView</div>;
+const AddminView = () => {
+  return <div>AddminView</div>;
 };
 
-export default AdminView;
+export default AddminView;
